@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       user: {
-        mobile: '18801185985',
+        mobile: '15640826921',
         code: '246810'
       },
       isLoading: false
@@ -81,6 +81,13 @@ export default {
         transform: translate(-50%,-50%);
         border-radius: 10px;
         overflow: hidden;
+        .van-nav-bar {
+          background-color: #0096fa;
+          .van-nav-bar__title {
+              color: white;
+          }
+      }
     }
 }
+
 </style>

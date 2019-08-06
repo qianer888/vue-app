@@ -1,13 +1,17 @@
-// 用来封装token的本地存储,方便之后调用
+// 将token进行本地存储
 
-const USER_KEY = 'user'
+const TOKEN_KEY = 'token'
+// 设置token
+export const setUser = data => {
+  window.localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
+}
 
-// 存储token 需要本地化存储 localStorge 和 sessionStorage 都可以
+// 获取token
+export const getUser = () => {
+  return JSON.parse(window.localStorage.getItem(TOKEN_KEY))
+}
 
-// 获取
-export const getUser = () => { JSON.parse(window.localStorage.getItem(USER_KEY)) }
-
-// 设置 注意第二个参数 需要字符串格式数据
-export const setUser = data => { window.localStorage.setItem(USER_KEY, JSON.stringify(data)) }
-
-export const removeUser = () => { window.localStorage.removeItem(USER_KEY) }
+// 移除token
+export const removeUser = () => {
+  return window.localStorage.removeItem(TOKEN_KEY)
+}
