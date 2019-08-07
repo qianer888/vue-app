@@ -1,11 +1,14 @@
 <template>
   <div class='home-container'>
        <!-- 导航 -->
-    <van-nav-bar title="首页" fixed/>
+       <!-- vant框架中使用原生js使用修饰符.native -->
+    <van-nav-bar title="首页" fixed  @click-right="onClickRight">
+       <van-icon name="search" slot="right" />
+    </van-nav-bar>
   <!-- 内容
   1. tab切换
   2.list列表:加载更多+下拉刷新 -->
-  <van-tabs v-model="activeChannelIndex" class="channel-tabs">
+  <van-tabs @change="handleChangeTab" v-model="activeChannelIndex" class="channel-tabs" :lazy-render="false">
     <!-- 自定义按钮 -->
     <div slot='nav-right' class="wap-nav" @click="handleShowPopChannel">
       <van-icon name="wap-nav"></van-icon>
@@ -47,7 +50,7 @@
     </van-tabs>
     <!-- 更多操作 -->
     <more-action @dislike-success="handleDislikeSuccess" v-model="isShowDiaMore" :currentArticle="currentArticle"></more-action>
-    <Channels @update:active-index="activeChannelIndex=$event" :activeChannelIndex="activeChannelIndex" :channels="channels" v-model="isShowPopChannel"></Channels>
+    <Channels @delete-success="handleDeleteSuccess" @update:active-index="activeChannelIndex=$event" :activeChannelIndex="activeChannelIndex" :channels="channels" v-model="isShowPopChannel"></Channels>
   </div>
 </template>
 
@@ -104,6 +107,21 @@ export default {
     }
   },
   methods: {
+    // 点击右侧跳转
+    onClickRight () {
+      // console.log('-----')
+      this.$router.push({ name: 'search' })
+    },
+    handleChangeTab () {
+      // 在tab切换的时候进行手动更新数据
+      this.onLoad()
+    },
+    handleDeleteSuccess () {
+      if (!this.activeChannel.articles.length) {
+      // 手动更新数据
+        this.onLoad()
+      }
+    },
     handleShowPopChannel () {
       this.isShowPopChannel = true
     },
@@ -166,7 +184,7 @@ export default {
         this.onLoad()
         this.refreshSuccessText = '更新完毕'
       }
-      this.refreshSuccessText = '无最新数据'
+      this.refreshSuccessText = '更新完成'
       // 停止动画
       this.activeChannel.downPullLoading = false
     },
@@ -262,6 +280,10 @@ export default {
     background-color: #0096fa;
     .van-nav-bar__title {
         color: white;
+    }
+    .van-icon-search {
+      color:#fff;
+      font-size:40px;
     }
 }
 .channel-tabs /deep/ .wap-nav {

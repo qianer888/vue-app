@@ -123,6 +123,7 @@ export default {
       // console.log('delChannel....')
       // 两种 本地和发送请求
       this.channels.splice(index, 1)
+      // [优化] 父组件无数据,就在把删除成功的消息发给父组件,交给父组件去管理 (子传父)
       this.$emit('delete-success')
       // 如果登录了
       if (this.user) {
