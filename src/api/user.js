@@ -20,3 +20,21 @@ export const login = ({
     }
   })
 }
+
+// 关注和取消关注
+export const starUser = (user_id) => {
+  return request({
+    method: 'post',
+    url: `/app/v1_0/user/followings`,
+    data: {
+      target: user_id
+    }
+  })
+}
+
+export const unstarUser = user_id => {
+  return request({
+    method: 'delete',
+    url: `/app/v1_0/user/followings/${user_id}`
+  })
+}

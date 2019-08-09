@@ -19,8 +19,8 @@
 
           <!-- 列表  van-list -->
           <van-list v-model="item.upPullLoading" :finished="item.upPullFinished" finished-text="没有更多了" @load="onLoad">
-            <!--articles是当前激活频道的文章列表  -->
-            <van-cell v-for="item in item.articles" :key="item.art_id.toString()" :title="item.title">
+            <!--articles是当前激活频道的文章列表    -->
+            <van-cell @click="$router.push({name:'article',params:{article_id:item.art_id.toString()}})" v-for="item in item.articles" :key="item.art_id.toString()" :title="item.title">
               <template slot="label">
                 <!-- v-show:更新频繁 v-if:更新不频繁 -->
                 <van-grid :border="false" :column-num="3" v-show="item.cover.type !== 0">

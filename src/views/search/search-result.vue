@@ -34,12 +34,13 @@ export default {
     // 当前组件-> this-> 当前Vue构造函数的实例化对象-> Vue实例-> Vue实例对象
     this.$destroy()
   },
+  // 当前组件接收了外部传入的路由数据 -> 应该转为自己的数据 data()和计算属性和props都可以讲外部数据转化为自己组件的数据
+  // 但是只有计算属性更加合理,props是当前组件作为标签作用在父组件上; data() 也可以但更多的是用在推动视图,但是只有计算属性更加优化,当q变化时可以methods中的q参数也会变化
   computed: {
     q () {
       return this.$route.params.q
     }
   },
-  // 当前组件接收了外部传入的路由数据 -> 应该转为自己的数据
   methods: {
     // 一进来就加载
     async onLoad () {
