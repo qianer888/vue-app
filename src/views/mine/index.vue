@@ -1,9 +1,34 @@
 <template>
-  <div class='container'></div>
+  <div>
+    <un-login v-if="!$store.state.user" />
+    <user-info v-else />
+  </div>
 </template>
 
 <script>
-export default {}
+import UnLogin from './components/un-login'
+import UserInfo from './components/user-info'
+
+export default {
+  name: 'MyIndex',
+  components: {
+    UnLogin,
+    UserInfo
+  },
+
+  data () {
+    return {
+
+    }
+  },
+
+  created () {
+    console.log('created')
+  },
+
+  methods: {
+  }
+}
 </script>
 
-<style scoped lang='less'></style>
+<style lang="less" scoped></style>

@@ -16,9 +16,16 @@ export default new Router({
       path: '/',
       name: 'home',
       // 路由的 ->组件的懒加载
+      component: () => import('@/views/home')
+    },
+    {
+      path: '/mine',
+      name: 'mine',
+      // 路由的 ->组件的懒加载
       component: () =>
-                    import('@/views/home')
-    }]
+                  import('@/views/mine')
+    }
+    ]
   },
   {
     path: '/login',
@@ -47,6 +54,14 @@ export default new Router({
     // 路由的 ->组件的懒加载
     component: () =>
                 import('@/views/article')
+  },
+  {
+    path: 'user-profile',
+    name: 'user-profile',
+    // 路由的 ->组件的懒加载
+    component: () =>
+                import('@/views/user-profile')
   }
+
   ]
 })
